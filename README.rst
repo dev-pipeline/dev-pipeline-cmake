@@ -28,7 +28,9 @@ but it should be available for pretty much every operating system.
 
 Using
 -----
-You can use :code:`cmake` as an option for :code:`build` in a :code:`build.config`.
+You can use :code:`cmake` as an option for :code:`build` in a
+:code:`build.config`.  Information about options you can set are in the
+documentation_.
 
 
 .. |codacy| image:: https://api.codacy.com/project/badge/Grade/de9145db420e4d83a84f3eef8da5b769
@@ -41,4 +43,5 @@ You can use :code:`cmake` as an option for :code:`build` in a :code:`build.confi
 
 .. _CMake: https://cmake.org
 .. _dev-pipeline: https://github.com/dev-pipeline/dev-pipeline
+.. _documentation: docs/builder-cmake.rst
 .. _pip: https://pypi.python.org/pypi/pip
