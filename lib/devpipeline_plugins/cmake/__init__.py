@@ -11,9 +11,10 @@ class CMake:
 
     """This class manages the details of building using CMake."""
 
-    def __init__(self, ex_args, config_args):
+    def __init__(self, ex_args, target_config, config_args):
         self.ex_args = ex_args
         self._config_args = config_args
+        self._target_config = target_config
 
     def configure(self, src_dir, build_dir):
         """This function builds the cmake configure command."""
@@ -49,8 +50,7 @@ class CMake:
                         '--target',
                         'install']
         if path:
-            install_args.extend(['--',
-                                 "DESTDIR={}".format(path)])
+            self._target_config["env"]["DESTDIR"] = path
         return [{
             "args": install_args
         }]
@@ -77,7 +77,9 @@ _USABLE_ARG_FNS = {
     "toolchain_file": lambda v: _handle_cmake_arg(
         v, lambda v: ["-DCMAKE_TOOLCHAIN_FILE={}".format(v)]),
     "build_type": lambda v: _handle_cmake_arg(
-        v, lambda v: ["-DCMAKE_BUILD_TYPE={}".format(v)])
+        v, lambda v: ["-DCMAKE_BUILD_TYPE={}".format(v)]),
+    "generator": lambda v: _handle_cmake_arg(
+        v, lambda v: ["-G", v])
 }
 
 _USABLE_ARGS = {
@@ -86,7 +88,8 @@ _USABLE_ARGS = {
     "cc": None,
     "cxx": None,
     "toolchain_file": None,
-    "build_type": None
+    "build_type": None,
+    "generator": None
 }
 
 _VALID_FLAG_SUFFIXES = [
@@ -210,7 +213,7 @@ def _make_cmake(current_target, common_wrapper):
         configure_args.extend(option_fns[key](v)))
     devpipeline.toolsupport.args_builder("cmake", current_target, _EX_ARGS,
                                          _add_value)
-    return common_wrapper(CMake(cmake_args, configure_args))
+    return common_wrapper(CMake(cmake_args, current_target, configure_args))
 
 
 def get_builders():

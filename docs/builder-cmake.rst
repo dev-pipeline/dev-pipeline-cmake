@@ -18,6 +18,9 @@ Configuration Options
 - :code:`cmake.build_type` - The build configuration CMake should use.
   Options can be anything supported by CMake, but common values are Debug or
   Release (note the capitalization).
+- :code:`cmake.generator` - The generator CMake should use.  The argument will
+  be passed directly to CMake, meaning valid values are dependent on your
+  environment.
 
 The following flags can be specialized based on build type.  For example, to
 set cflags across a project use :code:`cmake.cflags`, but to set specific
