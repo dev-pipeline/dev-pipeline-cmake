@@ -8,11 +8,17 @@ setup(
     package_dir={
         "": "lib"
     },
-    packages=['devpipeline_plugins.cmake'],
+    packages=['devpipeline_cmake'],
 
     install_requires=[
         'dev-pipeline >= 0.2.0'
     ],
+
+    entry_points={
+        'devpipeline.builders': [
+            'cmake = devpipeline_cmake:make_cmake',
+        ]
+    },
 
     author="Stephen Newell",
     description="cmake plugin for dev-pipeline",
