@@ -4,7 +4,7 @@
 
 import re
 
-import devpipeline.toolsupport
+import devpipeline_core.toolsupport
 
 
 class CMake:
@@ -115,7 +115,7 @@ def _extend_cflags(base, suffix, value):
 
 
 def _make_common_args(arg_keys_list, prefix_string, suffix_string):
-    new_args = devpipeline.toolsupport.build_flex_args_keys(
+    new_args = devpipeline_core.toolsupport.build_flex_args_keys(
         [arg_keys_list, _VALID_FLAG_SUFFIXES])
     prefix_pattern = re.compile(prefix_string)
     suffix_pattern = re.compile(suffix_string)
@@ -159,7 +159,7 @@ _LDFLAG_ARGS = [
 
 
 def _make_ldflag_args():
-    base_args = devpipeline.toolsupport.build_flex_args_keys(
+    base_args = devpipeline_core.toolsupport.build_flex_args_keys(
         [["ldflags"], _LDFLAG_ARGS])
     return _make_common_args(base_args, R"ldflags\.(\w+)", R"\.(\w+)$")
 
@@ -207,10 +207,10 @@ def _make_cmake(current_target, common_wrapper):
         args_key, args_value = _EX_ARG_FNS[key](value)
         cmake_args[args_key] = args_value
 
-    devpipeline.toolsupport.args_builder(
+    devpipeline_core.toolsupport.args_builder(
         "cmake", current_target, options,
         lambda v, key:
         configure_args.extend(option_fns[key](v)))
-    devpipeline.toolsupport.args_builder("cmake", current_target, _EX_ARGS,
+    devpipeline_core.toolsupport.args_builder("cmake", current_target, _EX_ARGS,
                                          _add_value)
     return common_wrapper(CMake(cmake_args, current_target, configure_args))
