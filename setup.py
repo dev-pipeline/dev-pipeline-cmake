@@ -2,6 +2,9 @@
 
 from setuptools import setup, find_packages
 
+with open('README.rst') as f:
+    long_description = f.read()
+
 setup(
     name="dev-pipeline-cmake",
     version="0.2.0",
@@ -22,6 +25,18 @@ setup(
 
     author="Stephen Newell",
     description="cmake plugin for dev-pipeline",
+    long_description=long_description,
+    long_description_content_type='text/x-rst',
     license="BSD-2",
     url="https://github.com/dev-pipeline/dev-pipeline-cmake",
+    classifiers=[
+        "Development Status :: 2 - Pre-Alpha",
+        "Environment :: Plugins",
+        "Framework :: dev-pipeline",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: BSD License",
+        "Topic :: Software Development",
+        "Topic :: Software Development :: Build Tools :: CMake",
+        "Topic :: Utilities"
+    ]
 )
