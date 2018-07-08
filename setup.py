@@ -16,7 +16,7 @@ setup(
 
     entry_points={
         'devpipeline.builders': [
-            'cmake = devpipeline_cmake:make_cmake',
+            'cmake = devpipeline_cmake:_CMAKE_TOOL',
         ]
     },
 
