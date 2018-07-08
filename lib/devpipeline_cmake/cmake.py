@@ -212,5 +212,5 @@ def _make_cmake(current_target, common_wrapper):
         lambda v, key:
         configure_args.extend(option_fns[key](v)))
     devpipeline_core.toolsupport.args_builder("cmake", current_target, _EX_ARGS,
-                                         _add_value)
+                                              _add_value)
     return common_wrapper(CMake(cmake_args, current_target, configure_args))
