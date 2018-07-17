@@ -5,6 +5,7 @@
 import re
 
 import devpipeline_core.toolsupport
+import devpipeline_build
 
 
 class CMake:
@@ -194,7 +195,7 @@ _EX_ARG_FNS = {
 }
 
 
-def _make_cmake(current_target, common_wrapper):
+def _make_cmake(current_target):
     """This function initializes a CMake builder for building the project."""
     configure_args = [
         "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
@@ -213,4 +214,5 @@ def _make_cmake(current_target, common_wrapper):
         configure_args.extend(option_fns[key](v)))
     devpipeline_core.toolsupport.args_builder("cmake", current_target, _EX_ARGS,
                                               _add_value)
-    return common_wrapper(CMake(cmake_args, current_target, configure_args))
+    return devpipeline_build.make_simple_builder(
+        CMake(cmake_args, current_target, configure_args), current_target)

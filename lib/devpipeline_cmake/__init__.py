@@ -5,7 +5,7 @@
 import devpipeline_cmake.cmake
 
 
-def make_cmake(current_configuration, common_wrapper):
+def make_cmake(current_configuration):
     """
     Construct a builder that works with CMake.
 
@@ -14,8 +14,7 @@ def make_cmake(current_configuration, common_wrapper):
     common_wrapper - a function to provide integration with built-in
                      functionality
     """
-    return devpipeline_cmake.cmake._make_cmake(current_configuration,
-                                               common_wrapper)
+    return devpipeline_cmake.cmake._make_cmake(current_configuration)
 
 
 _CMAKE_TOOL = (make_cmake, "CMake build system generator.")
