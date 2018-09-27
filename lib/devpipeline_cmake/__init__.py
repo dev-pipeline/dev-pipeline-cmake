@@ -17,4 +17,12 @@ def make_cmake(current_configuration):
     return devpipeline_cmake.cmake._make_cmake(current_configuration)
 
 
-_CMAKE_TOOL = (make_cmake, "CMake build system generator.")
+_MAJOR = 0
+_MINOR = 2
+_PATCH = 0
+
+_STRING = "{}.{}.{}".format(_MAJOR, _MINOR, _PATCH)
+
+_CMAKE_TOOL = (
+    make_cmake,
+    "({}) CMake build system generator.".format(_STRING))
