@@ -7,15 +7,15 @@ with open('README.rst') as f:
 
 setup(
     name="dev-pipeline-cmake",
-    version="0.2.0",
+    version="0.3.0",
     package_dir={
         "": "lib"
     },
     packages=find_packages("lib"),
 
     install_requires=[
-        'dev-pipeline-build >= 0.2.0',
-        'dev-pipeline-core >= 0.2.0'
+        'dev-pipeline-build >= 0.3.0',
+        'dev-pipeline-core >= 0.3.0'
     ],
 
     entry_points={
