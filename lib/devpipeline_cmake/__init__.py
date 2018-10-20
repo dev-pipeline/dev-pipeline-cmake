@@ -14,6 +14,7 @@ def make_cmake(current_configuration):
     common_wrapper - a function to provide integration with built-in
                      functionality
     """
+    # pylint: disable=protected-access
     return devpipeline_cmake.cmake._make_cmake(current_configuration)
 
 
