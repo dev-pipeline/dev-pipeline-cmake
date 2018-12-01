@@ -2,6 +2,7 @@
 
 """This modules supports building CMake projects."""
 
+import os.path
 import re
 
 import devpipeline_core.toolsupport
@@ -13,15 +14,18 @@ class CMake:
     """This class manages the details of building using CMake."""
 
     def __init__(self, ex_args, target_config, config_args):
-        self.ex_args = ex_args
+        self._ex_args = ex_args
         self._config_args = config_args
         self._target_config = target_config
 
+    def get_key_args(self):
+        return self._config_args
+
     def configure(self, src_dir, build_dir):
         """This function builds the cmake configure command."""
-        ex_path = self.ex_args.get("project_path")
+        ex_path = self._ex_args.get("project_path")
         if ex_path:
-            src_dir += "/{}".format(ex_path)
+            src_dir = os.path.join(src_dir, ex_path)
 
         return [{
             "args": [
