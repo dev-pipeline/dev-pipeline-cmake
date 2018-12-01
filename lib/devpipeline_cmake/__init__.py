@@ -19,7 +19,7 @@ def make_cmake(current_configuration):
 
 
 _MAJOR = 0
-_MINOR = 2
+_MINOR = 4
 _PATCH = 0
 
 _STRING = "{}.{}.{}".format(_MAJOR, _MINOR, _PATCH)
