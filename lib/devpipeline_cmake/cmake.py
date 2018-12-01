@@ -67,8 +67,7 @@ def _handle_cmake_arg(value, valid_fn):
 
 
 _USABLE_ARG_FNS = {
-    "args": lambda v: _handle_cmake_arg(
-        v, lambda v: [x.strip() for x in v.split(",")]),
+    "args": lambda v: _handle_cmake_arg(v, lambda v: v),
     "prefix": lambda v: _handle_cmake_arg(
         v, lambda v: ["-DCMAKE_INSTALL_PREFIX={}".format(v)]),
     "cc": lambda v: _handle_cmake_arg(
@@ -84,7 +83,7 @@ _USABLE_ARG_FNS = {
 }
 
 _USABLE_ARGS = {
-    "args": " ",
+    "args": devpipeline_core.toolsupport.ListSeparator(),
     "prefix": None,
     "cc": None,
     "cxx": None,
