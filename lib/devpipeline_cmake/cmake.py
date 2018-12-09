@@ -55,7 +55,7 @@ class CMake:
                         '--target',
                         'install']
         if path:
-            self._target_config["env"]["DESTDIR"] = path
+            self._target_config.env["DESTDIR"] = path
         return [{
             "args": install_args
         }]
