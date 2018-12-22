@@ -24,6 +24,4 @@ _PATCH = 0
 
 _STRING = "{}.{}.{}".format(_MAJOR, _MINOR, _PATCH)
 
-_CMAKE_TOOL = (
-    make_cmake,
-    "({}) CMake build system generator.".format(_STRING))
+_CMAKE_TOOL = (make_cmake, "({}) CMake build system generator.".format(_STRING))
