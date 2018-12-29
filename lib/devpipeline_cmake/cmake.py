@@ -21,25 +21,28 @@ class CMake:
     def get_key_args(self):
         return self._config_args
 
-    def configure(self, src_dir, build_dir):
+    def configure(self, src_dir, build_dir, **kwargs):
         """This function builds the cmake configure command."""
+        del kwargs
         ex_path = self._ex_args.get("project_path")
         if ex_path:
             src_dir = os.path.join(src_dir, ex_path)
 
         return [{"args": ["cmake", src_dir] + self._config_args, "cwd": build_dir}]
 
-    def build(self, build_dir):
+    def build(self, build_dir, **kwargs):
         """This function builds the cmake build command."""
         # pylint: disable=no-self-use
+        del kwargs
         return [{"args": ["cmake", "--build", build_dir]}]
 
-    def install(self, build_dir, path=None):
+    def install(self, build_dir, install_dir=None, **kwargs):
         """This function builds the cmake install command."""
         # pylint: disable=no-self-use
+        del kwargs
         install_args = ["cmake", "--build", build_dir, "--target", "install"]
-        if path:
-            self._target_config.env["DESTDIR"] = path
+        if install_dir:
+            self._target_config.env["DESTDIR"] = install_dir
         return [{"args": install_args}]
 
 
@@ -164,7 +167,7 @@ _EX_ARGS = {"project_path": None}
 _EX_ARG_FNS = {"project_path": lambda v: ("project_path", v)}
 
 
-def _make_cmake(current_target):
+def _make_cmake(config_info):
     """This function initializes a CMake builder for building the project."""
     configure_args = ["-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"]
     cmake_args = {}
@@ -177,13 +180,13 @@ def _make_cmake(current_target):
 
     devpipeline_core.toolsupport.args_builder(
         "cmake",
-        current_target,
+        config_info,
         options,
         lambda v, key: configure_args.extend(option_fns[key](v)),
     )
     devpipeline_core.toolsupport.args_builder(
-        "cmake", current_target, _EX_ARGS, _add_value
+        "cmake", config_info, _EX_ARGS, _add_value
     )
     return devpipeline_build.make_simple_builder(
-        CMake(cmake_args, current_target, configure_args), current_target
+        CMake(cmake_args, config_info, configure_args), config_info
     )
