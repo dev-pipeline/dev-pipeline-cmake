@@ -17,6 +17,15 @@ class CMake:
         self._ex_args = ex_args
         self._config_args = config_args
         self._target_config = target_config
+        self._build_type = None
+
+    def set_build_type(self, build_type):
+        self._build_type = build_type
+
+    def _get_build_flags(self):
+        if self._build_type:
+            return ["--config", self._build_type]
+        return []
 
     def get_key_args(self):
         return self._config_args
@@ -34,13 +43,16 @@ class CMake:
         """This function builds the cmake build command."""
         # pylint: disable=no-self-use
         del kwargs
-        return [{"args": ["cmake", "--build", build_dir]}]
+        args = ["cmake", "--build", build_dir]
+        args.extend(self._get_build_flags())
+        return [{"args": args}]
 
     def install(self, build_dir, install_dir=None, **kwargs):
         """This function builds the cmake install command."""
         # pylint: disable=no-self-use
         del kwargs
         install_args = ["cmake", "--build", build_dir, "--target", "install"]
+        install_args.extend(self._get_build_flags())
         if install_dir:
             self._target_config.env["DESTDIR"] = install_dir
         return [{"args": install_args}]
@@ -187,6 +199,8 @@ def _make_cmake(config_info):
     devpipeline_core.toolsupport.args_builder(
         "cmake", config_info, _EX_ARGS, _add_value
     )
-    return devpipeline_build.make_simple_builder(
-        CMake(cmake_args, config_info, configure_args), config_info
-    )
+    cmake = CMake(cmake_args, config_info, configure_args)
+    build_type = config_info.config.get("cmake.build_type")
+    if build_type:
+        cmake.set_build_type(build_type)
+    return devpipeline_build.make_simple_builder(cmake, config_info)
