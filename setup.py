@@ -9,14 +9,16 @@ _VERSION = "0.4.0"
 
 setup(
     name="dev-pipeline-cmake",
-    version=_VERSION,
+    version="0.4.1",
     package_dir={"": "lib"},
     packages=find_packages("lib"),
     install_requires=[
         "dev-pipeline-build >= {}".format(_VERSION),
         "dev-pipeline-core >= {}".format(_VERSION),
     ],
-    entry_points={"devpipeline.builders": ["cmake = devpipeline_cmake:_CMAKE_TOOL"]},
+    entry_points={
+        "devpipeline.builders": ["cmake = devpipeline_cmake.cmake:_CMAKE_TOOL"]
+    },
     author="Stephen Newell",
     description="cmake plugin for dev-pipeline",
     long_description=long_description,

@@ -6,6 +6,7 @@ import os.path
 import re
 
 import devpipeline_core.toolsupport
+import devpipeline_cmake
 import devpipeline_build
 
 
@@ -204,3 +205,10 @@ def _make_cmake(config_info):
     if build_type:
         cmake.set_build_type(build_type)
     return devpipeline_build.make_simple_builder(cmake, config_info)
+
+
+# pylint: disable=protected-access
+_CMAKE_TOOL = (
+    _make_cmake,
+    "({}) CMake build system generator.".format(devpipeline_cmake._STRING),
+)
