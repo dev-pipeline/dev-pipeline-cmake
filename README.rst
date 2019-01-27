@@ -2,6 +2,8 @@ dev-pipeline-cmake
 ==================
 |codacy|
 |code-climate|
+|lgtm|
+|lgtm-quality|
 
 A CMake_ plugin for `dev-pipeline`_
 
@@ -35,10 +37,13 @@ documentation_.
 
 .. |codacy| image:: https://api.codacy.com/project/badge/Grade/de9145db420e4d83a84f3eef8da5b769
     :target: https://www.codacy.com/app/snewell/dev-pipeline-cmake?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=dev-pipeline/dev-pipeline-cmake&amp;utm_campaign=Badge_Grade
-
 .. |code-climate| image:: https://api.codeclimate.com/v1/badges/5dbb268d5b1d1b269b1d/maintainability
    :target: https://codeclimate.com/github/dev-pipeline/dev-pipeline-cmake/maintainability
    :alt: Maintainability
+.. |lgtm| image:: https://img.shields.io/lgtm/alerts/g/dev-pipeline/dev-pipeline-cmake.svg?logo=lgtm&logoWidth=18
+    :target: https://lgtm.com/projects/g/dev-pipeline/dev-pipeline-cmake/alerts/
+.. |lgtm-quality| image:: https://img.shields.io/lgtm/grade/python/g/dev-pipeline/dev-pipeline-cmake.svg?logo=lgtm&logoWidth=18
+    :target: https://lgtm.com/projects/g/dev-pipeline/dev-pipeline-cmake/context:python
 
 
 .. _CMake: https://cmake.org
